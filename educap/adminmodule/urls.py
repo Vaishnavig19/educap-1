@@ -12,6 +12,6 @@ urlpatterns = [
      path("course",views.course,name='course'),
      path("viewcourse",views.viewcourse,name='viewcourse'),
      path("video",views.video,name='video'),
-     path("assingment",views.assingment,name='assingment'),
+     path("assign",views.assign,name='assingment'),
      path("notes",views.notes,name='notes'),
 ]

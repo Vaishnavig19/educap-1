@@ -73,11 +73,12 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form action="../adminmodule/assingment" method="post" enctype="multipart/form-data">
+        <form action="../adminmodule/assign" method="post" enctype="multipart/form-data">
           <p> Name:</p>
           <input type="text" name="aname" required><br>
           <p>Add Assingment</p>
           <input type="file" name="adesc" required><br>
+          <input type="file" name="adesc" required hidden value=""><br>
 
 
           {% csrf_token %}
@@ -158,24 +159,18 @@
 
 <div class="row shadow p-3 mb-3 bg-body rounded m-1 border">
   <h2>{{course.name}} Files</h2>
-</div>
+{% comment %} </div>
+ <div class="container">
+  <div class="row mb-2 my-6">
 
-<!--file Button trigger modal -->
-<div style="margin-left: 89%;">
-  <button style="align-items: left;" type="button" class="btn btn-primary" data-bs-toggle="modal"
-    data-bs-target="#addCourseModal">
-    Add File &nbsp; &nbsp;
-  </button>
-</div>
-<br>
 <!--video Button trigger modal -->
 <div style="margin-left: 89%;">
   <button style="align-items: left;" type="button" class="btn btn-primary" data-bs-toggle="modal"
     data-bs-target="#addvideoModal">
     Add video
   </button>
-</div>
-<br>
+</div> {% endcomment %}
+
 <!--assingments Button trigger modal -->
 <div style="margin-left: 89%;">
   <button style="align-items: left;" type="button" class="btn btn-primary" data-bs-toggle="modal"
@@ -183,7 +178,7 @@
     Add Assign
   </button>
 </div>
-<br>
+
 <!--notes button-->
 <div style="margin-left: 89%;">
   <button style="align-items: left;" type="button" class="btn btn-primary" data-bs-toggle="modal"
@@ -191,8 +186,9 @@
     Add notes &nbsp;
   </button>
 </div>
-<br>
-
+</div>
+</div> 
+<!-- Example single danger button -->
 
 {% if notes %}
 <div class="container">
@@ -201,12 +197,11 @@
 
       {% for i in notes %}
     <div class="col-4">
-
       <div class="card mt-4" style="width: 18rem;">
         <div class="ratio ratio-16x9">
           <iframe src="../media/{{i.file}}" title="course file" allowfullscreen></iframe>
         </div>
-
+      
         <div class="card-body">
           <p class="card-text">{{i.name}}</p>
           <div class="d-flex align-items-center">
@@ -219,7 +214,7 @@
                 style="text-decoration:None; color:white;">update</a>
             </button>
             <button type="button" class="btn btn-danger btn-sm btn-icon-text">
-              <a name="delete" href="../adminmodule/deleteinstance?data={{i.pk}}&op=1"
+              <a name="delete" href="../adminmodule/deleteinstance?data={{i.pk}}&op=2"
                 style="text-decoration:None; color:white;">Delete</a>
             </button>
           </div>

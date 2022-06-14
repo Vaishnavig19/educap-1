@@ -40,7 +40,34 @@
     </div>
   </div>
 </div>
+<!-- add assingment Modal -->
+<div class="modal fade" id="addassignModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add Assingment</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form action="../adminmodule/assign" method="post" enctype="multipart/form-data">
+          <p> Name:</p>
+          <input type="text" name="aname" required><br>
+          <p>Add Assingment</p>
+          <input type="file" name="adesc" required><br>
+          <input type="text" name="data" required hidden value=""><br>
 
+
+
+          {% csrf_token %}
+          <div class="modal-footer">
+            <input type="submit" class="btn btn-primary" value="Add"><br>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- update course Modal -->
 <div class="modal fade" id="editMemberModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -119,6 +146,16 @@
             <a name="delete" href="../adminmodule/viewcourse?data={{i.pk}}" style="text-decoration:None; color:white;">View</a>
             <i class="typcn typcn-edit btn-icon-append"></i>
           </button>
+          <div class="btn-group">
+            <button type="button" class="btn btn-sm btn-icon-text mr-3 dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Add
+            </button>
+            <div class="dropdown-menu">
+              <a class="dropdown-item"  href="../adminmodule/assign?data={{i.pk}}" data-bs-target="#addassignModal" data-bs-toggle="modal">Assignments</a>
+              <a class="dropdown-item" href="../adminmodule/notes?data={{i.pk}}">Notes</a>
+              <a class="dropdown-item" href="../adminmodule/video?data={{i.pk}}">Videos</a>
+          
+          </div>
           <button type="button" class="btn btn-success btn-sm btn-icon-text mr-3" onclick="filldata({'pk':'{{i.pk}}','name':'{{i.name}}','email':'{{i.email}}','address':'{{i.address}}','post':'{{i.post.pk}}'})" data-bs-toggle="modal" data-bs-target="#editMemberModal">
             Edit
             <i class="typcn typcn-edit btn-icon-append"></i>

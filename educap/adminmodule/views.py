@@ -26,7 +26,7 @@ def login(request):
             request.session['userid']=user.id
             return redirect("../adminmodule")
         except:
-            return redirect("../adminmodule/login")
+             return redirect("../adminmodule/login")
 
     return render(request,'adminmodule/login.html')
 
@@ -80,15 +80,22 @@ def viewcourse(request):
         return redirect('../adminmodule/login')
 
 def deleteinstance(request):
+    # to delete a course:-
     if request.GET['op']=='1':
         b = request.GET['data']
         Course.objects.filter(pk=b).update(status="deleted")
         return redirect('course')
+    # to delete a notes:-
+    if request.GET['op']=='2':
+        b = request.GET['data']
+        Notes.objects.filter(pk=b).update(status="deleted")
+        return redirect('viewcourse')
+
 
     return HttpResponse("Error")
 
 def video(request):
-        c= viewcouse().c
+       
         if request.method == "POST":
             vname = request.POST['name']
             file= request.FILES['file']
@@ -98,25 +105,29 @@ def video(request):
             ins.save()
             return render(request, 'adminmodule/viewcourse.html')
 
-def assingment(request):
-        if request.method == "POST":
-            acaption = request.POST['aname']
-            adesc= request.FILES['adesc']
-            print(acaption,adesc)
-            ins = assingments(name=acaption, assingment=adesc, aid=id )
-            print(ins)
+def assign(request):
+        data = request.GET['data']
+        print(data)
+        # c = Course.objects.get(pk=data)
+        # if request.method == "POST":
+        #     name = request.POST['aname']
+        #     file= request.FILES['adesc']
+        #     print(acaption,adesc)
+        #     ins = Assignment(name=name,file=file,cid=c )
+        #     print(ins)
+        #     ins.save()
+        return render(request, 'adminmodule/course.html')
+    # except:
+        # return redirect('../adminmodule/login')
+def notes(request):
+    # try:
+    if request.method == "POST":
+            name = request.POST['name']
+            file= request.POST['desc']
+            ins = Notes(name=name,file=file)
             ins.save()
-            return render(request, 'adminmodule/viewcourse.html')
+    return render(request, 'adminmodule/course.html')
+    
     # except:
     #     return redirect('../adminmodule/login')
-def notes(request):
-    try:
-        if request.method == "POST":
-            caption = request.POST['name']
-            desc= request.POST['desc']
-            ins = notes(caption=name,notes=desc)
-            ins.save()
-            return render(request, 'adminmodule/viewcourse.html')
-    except:
-        return redirect('../adminmodule/login')
 
