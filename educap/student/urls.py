@@ -8,5 +8,11 @@ urlpatterns = [
      path("login",views.login,name='login'),
      path('logout',views.logout,name='logout'),
      path('signup/',views.signup,name='signup'),
+     path('course',views.course,name='course'),
+     path('show',views.show,name='show'),
+     path('assign',views.assign,name='assign'),
+     path('video',views.video,name='video'),
+     path('notes',views.notes,name='notes'),
+     path('files',views.files,name='files'),
      path('', views.homes ,name='homes'),
 ]

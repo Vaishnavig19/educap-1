@@ -14,6 +14,7 @@ class Admins(models.Model):
 class Course(models.Model):
     name = models.CharField(max_length=50)
     desc = models.CharField(max_length=100)
+    image=models.ImageField( upload_to="course_image/", height_field=None, width_field=None, max_length=None,null=True)
     status = models.CharField(max_length=10, default="active")
 
     def __str__(self):

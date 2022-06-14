@@ -1,0 +1,38 @@
+{% extends 'student/base.html' %}
+{% block content %}
+{% if n %}
+<div class="container">
+  <div class="row">
+    
+
+      {% for i in n %}
+    <div class="col-4">
+
+      <div class="card mt-4" style="width: 18rem;">
+        <div class="ratio ratio-16x9">
+          <iframe src="../media/{{i.file}}" title="course notes" allowfullscreen></iframe>
+        </div>
+
+        <div class="card-body">
+          <p class="card-text">{{i.name}}</p>
+          <div class="d-flex align-items-center">
+            <button type="button" class="btn btn-success btn-sm btn-icon-text me-2 ">
+              <a name="delete" href="../adminmodule/viewcourse?data={{i.pk}}"
+                style="text-decoration:None; color:white;"class="text-center">View</a>
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    {% endfor %}
+
+  </div>
+</div>
+{% else %}
+<h3 class="mx-auto text-center" style="width: 400px;">
+  There are no notes
+</h3>
+{% endif %}
+
+{% endblock content %}

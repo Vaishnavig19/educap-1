@@ -1,12 +1,16 @@
 from django.shortcuts import render, redirect
 from .models import Student
+from adminmodule.models import Course,Admins,Assignment,Notes,Video
 
 
 # Create your views here.
 def homes(request):
     try:
         if request.session['userid'] != "":
-            return redirect('../')
+            student = Student.objects.get(id=request.session['userid'])
+
+            params = {"student": student}
+            return render(request, "student/homes.html", params)
         else:
             return redirect('../')
     except:
@@ -48,6 +52,47 @@ def logout(request):
     except:
         return redirect("../")
 
+def course(request):
+    courses=Course.objects.filter(status="active")
+    print(course)
+    return render(request,'student/course.html',{'courses':courses})
+
+def files(request):
+    try:
+        data = request.GET['data']
+        c = Course.objects.get(pk=data)
+        f = Notes.objects.filter(cid=c,status="active")
+        params = {'course': c,"files":f ,}
+        return render(request,'student/files.html',params)
+    except:
+        return redirect('../student/course')
+   
+
+def assign(request):
+    try:
+        data = request.GET['data']
+        c = Course.objects.get(pk=data)
+        a = Assignment.objects.filter(cid=c,status="active")
+        params = {'course': c,"a":a}
+        return render(request,'student/assign.html',params)
+    except:
+        return redirect('../student/course')
+    return render(request,'student/assign.html')
+def show(request):
+    return render(request,'student/show.html')
+def video(request):
+    # try:
+        data = request.GET['data']
+        c = Course.objects.get(pk=data)
+        v = Video.objects.filter(cid=c,status="active")
+        params = {'course': c,"v":v}
+        return render(request,'student/video.html',params)
+    # except:
+    #     return redirect('../student/course')
+    
+   
+def notes(request):
+    return render(request,'student/notes.html')
 
 
 

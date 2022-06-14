@@ -1,0 +1,21 @@
+{% extends 'student/base.html' %}
+{% block content %}
+
+{% if v %}
+{% for i in v %}
+<div class="card" style="width: 18rem;">
+    <video class="video-fluid" controls>
+        <source src="{{i.file.url}}" type="video/mp4" ></source></video>
+    <div class="card-body">
+      <h5 class="text-center">{{i.name}}</h5>
+      <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+      <a href="#" class="btn btn-primary">Go somewhere</a> -->
+    </div>
+  </div>
+  {% endfor %}
+  {% else %}
+  <h3 class="mx-auto" style="width: 400px;">
+    There are no  videos
+  </h3>
+  {% endif %}
+{% endblock content %}
